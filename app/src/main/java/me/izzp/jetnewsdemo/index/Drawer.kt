@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -72,8 +74,7 @@ private fun MenuItem(
     selected: Boolean,
     onClick: () -> Unit,
 ) {
-    val bgColor =
-        if (selected) mtColors.secondary.copy(0.3f) else mtColors.surface
+    val bgColor = if (selected) mtColors.secondary.copy(0.3f) else Color.Transparent
     val tint = if (selected) mtColors.secondary else mtColors.onSurface
     ListItem(
         icon = {
@@ -84,6 +85,7 @@ private fun MenuItem(
         },
         modifier = Modifier
             .padding(8.dp)
+            .clip(mtShapes.medium)
             .background(bgColor, mtShapes.medium)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },

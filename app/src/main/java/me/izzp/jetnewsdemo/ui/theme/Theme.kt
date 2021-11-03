@@ -33,6 +33,8 @@ private val DarkColorPalette = darkColors(
     secondaryVariant = Color(220, 10, 60),
     surface = Color.Black,
     onSurface = Color.White,
+    background = Color.Black,
+    onBackground = Color.White,
 )
 
 val Typography = Typography(

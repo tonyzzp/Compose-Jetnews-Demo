@@ -56,6 +56,7 @@ fun ArticleTopBar(
                 }
             }
         },
+        elevation = 1.dp,
     )
 }
 

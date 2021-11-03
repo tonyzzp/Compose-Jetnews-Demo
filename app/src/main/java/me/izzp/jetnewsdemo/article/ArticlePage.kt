@@ -69,12 +69,14 @@ private fun Body(
         },
     ) {
         Box(Modifier.fillMaxSize()) {
-            Content(
-                vm = vm,
-                onBackClick = onBackClick,
-                post = post,
-                sheetState = sheetState,
-            )
+            Surface {
+                Content(
+                    vm = vm,
+                    onBackClick = onBackClick,
+                    post = post,
+                    sheetState = sheetState,
+                )
+            }
         }
     }
 }

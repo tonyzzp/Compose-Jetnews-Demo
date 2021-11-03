@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import me.izzp.jetnewsdemo.data.MarkupType
 import me.izzp.jetnewsdemo.data.Paragraph
 import me.izzp.jetnewsdemo.data.ParagraphType
+import me.izzp.jetnewsdemo.mtColors
 import me.izzp.jetnewsdemo.mtShapes
 import me.izzp.jetnewsdemo.mtTypography
 import me.izzp.jetnewsdemo.ui.theme.body
@@ -50,6 +51,11 @@ private fun ClickableText(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
+    val style = if (style.color == Color.Unspecified) {
+        style.copy(mtColors.onSurface)
+    } else {
+        style
+    }
     ClickableText(
         text = text,
         modifier = modifier,
