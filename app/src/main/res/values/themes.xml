@@ -1,0 +1,10 @@
+<resources>
+
+    <style name="JetNewsDemoTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">?colorSurface</item>
+        <item name="android:background">?colorSurface</item>
+        <item name="android:windowLightStatusBar">?isLightTheme</item>
+        <item name="colorSurface">#ffffffff</item>
+        <item name="colorOnSurface">#ff000000</item>
+    </style>
+</resources>
