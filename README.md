@@ -1,11 +1,8 @@
 # Compose-Jetnews-Demo
 compose demo : jetnews
 
-![](screenshot/1.png)
-<br/><br/><br/>
-
-![](screenshot/2.png)
-<br/><br/><br/>
-
-![](screenshot/3.png)
-<br/><br/><br/>
+<div>
+<img src="screenshot/1.png" width="30%"/>
+<img src="screenshot/2.png" width="30%"/>
+<img src="screenshot/3.png" width="30%"/>
+</div>
