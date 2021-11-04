@@ -17,77 +17,58 @@ import androidx.compose.ui.Modifier
 import me.izzp.jetnewsdemo.JetNewsViewModel
 import me.izzp.jetnewsdemo.mtColors
 
+private class IntrestsItem(
+    val title: String,
+    val content: @Composable () -> Unit,
+)
+
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun InterestsPage(
     vm: JetNewsViewModel,
 ) {
+    var currentIndex by remember { mutableStateOf(0) }
+    val scrollStates = listOf(
+        rememberScrollState(),
+        rememberScrollState(),
+        rememberScrollState(),
+    )
+    val items = remember {
+        listOf(
+            IntrestsItem("Topics") { Topics(vm, scrollStates[0]) },
+            IntrestsItem("People") { People(vm, scrollStates[1]) },
+            IntrestsItem("Publications") { Publications(vm, scrollStates[2]) }
+        )
+    }
     Column(
         Modifier.fillMaxWidth(),
     ) {
-        var index by remember { mutableStateOf(0) }
         TabRow(
-            selectedTabIndex = index,
+            selectedTabIndex = currentIndex,
             backgroundColor = mtColors.surface,
             contentColor = mtColors.secondary,
         ) {
-            Tab(
-                selected = index == 0,
-                text = { Text("Topics") },
-                onClick = { index = 0 },
-                selectedContentColor = mtColors.secondary,
-                unselectedContentColor = mtColors.onSurface,
-            )
-            Tab(
-                selected = index == 1,
-                text = { Text("People") },
-                onClick = { index = 1 },
-                selectedContentColor = mtColors.secondary,
-                unselectedContentColor = mtColors.onSurface,
-            )
-            Tab(
-                selected = index == 2,
-                text = { Text("Publications") },
-                onClick = { index = 2 },
-                selectedContentColor = mtColors.secondary,
-                unselectedContentColor = mtColors.onSurface,
-            )
+            items.forEachIndexed { index, item ->
+                Tab(
+                    selected = currentIndex == index,
+                    text = { Text(item.title) },
+                    onClick = { currentIndex = index },
+                    selectedContentColor = mtColors.secondary,
+                    unselectedContentColor = mtColors.onSurface,
+                )
+            }
         }
         Box(
             Modifier.fillMaxSize()
         ) {
-            this@Column.AnimatedVisibility(
-                visible = index == 0,
-                enter = fadeIn(),
-                exit = fadeOut(),
-                content = {
-                    Topics(
-                        vm,
-                        key("topics") {
-                            rememberScrollState()
-                        }
-                    )
-                },
-            )
-            this@Column.AnimatedVisibility(
-                visible = index == 1,
-                enter = fadeIn(),
-                exit = fadeOut(),
-                content = { People(vm, key("people") { rememberScrollState() }) },
-            )
-            this@Column.AnimatedVisibility(
-                visible = index == 2,
-                enter = fadeIn(),
-                exit = fadeOut(),
-                content = {
-                    Publications(
-                        vm,
-                        key("publications") {
-                            rememberScrollState()
-                        }
-                    )
-                },
-            )
+            items.forEachIndexed { index, item ->
+                this@Column.AnimatedVisibility(
+                    visible = currentIndex == index,
+                    enter = fadeIn(),
+                    exit = fadeOut(),
+                    content = { item.content() }
+                )
+            }
         }
     }
 }
